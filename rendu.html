@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Mathys MULLIER, Giorgio UTZERI" />
+  <title>Rendu technique - SAé 2.03</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="template.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Rendu technique - SAé 2.03</h1>
+<p class="author">Mathys MULLIER, Giorgio UTZERI</p>
+<p class="date">Rendu le samedi 23 mars 2024</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#semaine-6">Semaine 6</a>
+<ul>
+<li><a href="#description-du-travail-de-la-semaine">Description du
+travail de la semaine</a></li>
+<li><a href="#préparation-des-machines-virtuelles">Préparation des
+machines virtuelles</a></li>
+<li><a
+href="#installation-manuelle-de-los-dune-machine-virtuelle">Installation
+manuelle de l’OS d’une machine virtuelle</a>
+<ul>
+<li><a href="#ajout-de-lutilisateur-au-groupe-sudo">Ajout de
+l’utilisateur au groupe sudo</a></li>
+</ul></li>
+<li><a
+href="#installation-automatique-de-los-dune-machine-virtuelle">Installation
+automatique de l’OS d’une machine virtuelle</a>
+<ul>
+<li><a href="#prérequis-indispensables-à-linstallation">Prérequis
+indispensables à l’installation</a></li>
+<li><a href="#configuration-de-linstallation-automatique">Configuration
+de l’installation automatique</a>
+<ul>
+<li><a href="#ajout-des-droits-sudo-à-lutilisateur-standard">Ajout des
+droits sudo à l’utilisateur standard</a></li>
+<li><a href="#installation-des-paquets">Installation des
+paquets</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#questions">Questions</a></li>
+</ul></li>
+<li><a href="#semaine-8">Semaine 8</a>
+<ul>
+<li><a href="#description-du-travail-de-la-semaine-1">Description du
+travail de la semaine</a></li>
+<li><a href="#configuration-de-git">Configuration de git</a></li>
+<li><a href="#questions-1">Questions</a></li>
+</ul></li>
+<li><a href="#semaine-10">Semaine 10</a>
+<ul>
+<li><a href="#description-du-travail-de-la-semaine-2">Description du
+travail de la semaine</a></li>
+<li><a href="#configuration-de-la-machine">Configuration de la
+machine</a></li>
+<li><a href="#création-du-projet">Création du projet</a></li>
+<li><a href="#questions-2">Questions</a></li>
+</ul></li>
+</ul>
+</nav>
+<div id="images">
+<p><img src="assets/univ-lille.png"
+alt="Logo de l’Université de Lille" /> <img src="assets/git-logo.png"
+alt="Logo de l’outil Git" /></p>
+</div>
+<h2 id="semaine-6">Semaine 6</h2>
+<h3 id="description-du-travail-de-la-semaine">Description du travail de
+la semaine</h3>
+<p>Durant cette première semaine, l’objectif est de procéder à la
+configuration de deux machines virtuelles. Les deux machines virtuelles
+seront identiques mais le processus de configuration sera différent pour
+chacune d’entre elles. Ces machines virtuelles se conforment à certaines
+caractéristiques. Le système d’exploitation utilisé sera Linux avec
+l’utilisation de sa distribution Debian (ici Debian 12) et les machines
+seront dotées de 2048 Mo de mémoire vive (RAM) ainsi que de 20 Go de
+disque dur. Sur ces machines seront alors placés deux utilisateurs et
+quelques logiciels de départ seront également installés. Notons
+également qu’il est important pour mettre en place une telle
+virtualisation que la machine hôte doit disposer d’au moins 4 Go de
+mémoire vive, 20 Go d’espace disque, et doit avoir VirtualBox installé,
+accompagné de son pack d’extension (<code>VBoxGuestAddition.iso</code>).
+Les deux installations seront lancées par le biais de l’interface
+graphique de VirtualBox. La première se fera de manière manuelle tandis
+que la seconde sera automatisée. Pour chacune de ces installations, nous
+allons répondre aux questions du sujet en lien avec ces
+installations.</p>
+<blockquote>
+<p>Concernant la première installation celle-ci sera une installation
+rapide sur VirtualBox . Pour cela nous nous sommes aidés de <a
+href="https://www.debian.org/releases/stable/installmanual">la
+documentation debian</a> concernant l’installation rapide.</p>
+</blockquote>
+<h3 id="préparation-des-machines-virtuelles">Préparation des machines
+virtuelles</h3>
+<p>Pour chacune des machines virtuelles, bien que leur configuration
+soit différente, elles commencent toutefois de la même manière. La
+première étape de ces configurations est de créer une nouvelle machine
+virtuelle via l’interface graphique. Une succession de questions
+relatives aux caractéristiques de la machine virtuelle sera alors posée.
+Ces questions concernent le nom de la machine virtuelle, la mémoire vive
+et l’espace disque qui lui sont alloués, son emplacement sur la machine
+physique et d’autres questions de ce genre. Les réponses à ces questions
+étant pour notre installation déjà fixées (et détaillées dans la
+description du travail de la semaine), il suffit d’y répondre simplement
+par le biais de l’interface graphique. Une fois ces informations
+indiquées à notre logiciel de virtualisation, il faut donner à la
+machine l’image ISO de notre système d’exploitation (en “l’insérant”
+dans le lecteur de CD-ROM virtuel de notre machine) pour que la machine
+puisse procéder à son installation logicielle.</p>
+<blockquote>
+<p>Nous avons trouver ce fichier ISO sur <a
+href="https://www.debian.org/">le site officiel de debian</a>.</p>
+</blockquote>
+<p>C’est précisément à cette étape que les deux configurations
+diffèrent. Nous nous intéresserons premièrement à l’installation
+manuelle du système d’exploitation puis nous nous intéresserons dans un
+second temps à l’automatisation de cette installation.</p>
+<h3
+id="installation-manuelle-de-los-dune-machine-virtuelle">Installation
+manuelle de l’OS d’une machine virtuelle</h3>
+<p>L’installation commence au démarrage de la machine. Le BIOS<a
+href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>, si ce dernier est bien configuré,
+va alors se démarrer depuis le support d’installation le plus approprié
+contenant une image ISO du système d’exploitation à installer. Sur une
+machine physique, il existe différents périphériques d’installation : un
+CD/DVD-ROM, une clé USB, une carte SD ou même depuis un environnement
+réseau PXE (Preboot Execution Environment) hébergé sur le réseau local
+de la machine. Pour notre machine virtuelle, nous nous contenterons
+d’utiliser un lecteur CD-ROM virtuel auquel nous attachons l’image ISO
+récupérée directement sur le site de Debian. Une fois le programme
+d’installation lancé, il faut, pour procéder à l’installation manuelle
+de l’OS, sélectionner le menu d’installation graphique. Une fois ce menu
+sélectionné, une succession de questions est alors posée à
+l’utilisateur, séparées pour la majeure partie des questions d’un temps
+d’installation. Ces questions concernent le choix de la langue, le pays,
+la disposition du clavier, la configuration réseau, le partitionnement
+du disque, la configuration du système et du gestionnaire de démarrage.
+C’est également lors de cette étape que l’on peut décider d’installer
+différents paquetages logiciels tels que l’environnement de bureau MATE
+(exigé pour notre projet), un serveur web, un serveur et autres
+logiciels utiles. Une fois toutes ces questions répondues et une fois
+les temps d’installations écoulés, le système est prêt à être utilisé.
+Le principal avantage de cette installation manuelle est l’aspect
+graphique facilitant grandement l’installation pour des utilisateurs
+novices. Le principal inconvénient de cette méthode est quant à lui le
+fait de devoir rester devant son ordinateur afin de pouvoir interagir
+avec la machine lorsque nécessaire et cela malgré les plus ou moins
+longs temps d’attente imposés par l’installation du système. Un autre
+inconvénient est que certaines autres tâches restent encore à réaliser
+une fois l’installation terminée. Dans notre exemple, à la fin de
+l’installation, seul l’administrateur du système (root) ne possède les
+droits sudo<a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a>. Or, on souhaite que l’utilisateur
+principal les possède également. Nous devons donc encore procéder à
+l’ajout de l’utilisateur au groupe sudo.</p>
+<h4 id="ajout-de-lutilisateur-au-groupe-sudo">Ajout de l’utilisateur au
+groupe sudo</h4>
+<p>Pour ajouter un utilisateur au groupe sudo, il existe différentes
+méthodes. Nous allons vous en présenter une. La première étape est
+d’ouvrir un terminal en tant qu’administrateur. Pour cela, il suffit
+soit d’ouvrir simplement le terminal depuis la session de
+l’administrateur ou, le cas échéant, de saisir la commande « su - »
+avant de saisir le mot de passe de l’administrateur. Une fois le
+terminal ouvert en tant qu’administrateur, il suffit de saisir la
+commande <code>sudo visudo</code>. Cette commande ouvre alors un fichier
+dans lequel il faut repérer la ligne :
+<code># User privilege specification</code> et d’ajouter en dessous de
+cette ligne la chaîne de caractères suivante :
+<code>&lt;nom_utilisateur&gt; ALL=(ALL:ALL) ALL</code>. Il faut alors
+sauvegarder les modifications du fichier avant de relancer la session de
+l’utilisateur.</p>
+<blockquote>
+<p>Si on veut faire en sorte que les utilisateurs n’aient pas à saisir
+leurs mots de passe lors de l’utilisation de la commande sudo, il faut
+saisir, toujours dans le même fichier, la ligne :
+<code>\%sudo ALL=(ALL) NOPASSWD:ALL</code></p>
+</blockquote>
+<h3
+id="installation-automatique-de-los-dune-machine-virtuelle">Installation
+automatique de l’OS d’une machine virtuelle</h3>
+<h4 id="prérequis-indispensables-à-linstallation">Prérequis
+indispensables à l’installation</h4>
+<p>La première étape indispensable à la configuration automatique d’une
+machine virtuelle est de fournir au logiciel de virtualisation (ici
+VirtualBox) des fichiers de préconfiguration utilisés lors de
+l’installation afin que l’installation automatique satisfasse nos
+attentes. Les fichiers indispensables à cette installation nous ont été
+fournis par le biais de Moodle. Parmi ces fichiers, on retrouve une
+image ISO virtuelle associant (grossièrement) les fichiers utilisés lors
+de l’installation. C’est ce fichier qui doit être ajouté au lecteur
+virtuel de la machine virtuelle avant l’installation pour que
+l’installation automatique puisse se lancer. Ce fichier est un fichier
+d’extension .viso.</p>
+<blockquote>
+<p>Pour que l’installation puisse se lancer, on doit ajouter au fichier
+.viso fourni sur Moodle un <a
+href="https://www.virtualbox.org/manual/UserManual.html#vdidetails">identifiant
+UUID</a> permettant à VirtualBox d’identifier la machine virtuelle.</p>
+</blockquote>
+<p>Pour obtenir cet UUID, il existe (sûrement parmi tant d’autres) deux
+solutions :</p>
+<ul>
+<li>La première est d’exécuter dans un terminal la commande :
+<code>cat /proc/sys/kernel/random/uuid</code> puis de copier le résultat
+de la commande dans le fichier <code>S203-Debian12.viso</code> à côté du
+champ <code>--iprt-iso-maker-file-marker-bourne-sh=</code></li>
+<li>La deuxième solution, plus compliquée à mémoriser mais plus
+efficace, est d’utiliser directement la commande sed afin que le
+résultat de la commande précédente soit directement ajouté au bon
+endroit. Pour faciliter les différentes installations (une installation
+à chaque fois que nous souhaitons tester une fonctionnalité de
+l’installation automatique), nous avons décidé d’écrire un script
+addUUID.sh exécutable reprenant la commande sed donnée par le sujet
+:</li>
+</ul>
+<pre><code>#!/bin/bash
+sed -i -E &quot;s/(--iprt-iso-maker-file-marker-bourne-sh).*$/\1=$(cat 
+/proc/sys/kernel/random/uuid)/&quot; ./S203-Debian12.viso</code></pre>
+<p>En plus de l’image ISO virtuelle, nous devons, évidemment, fournir à
+la machine virtuelle l’image ISO de Debian, le fichier de configuration
+pour l’automatisation (preseed.cfg) ainsi que d’autres fichiers utiles à
+la configuration de l’installation. Une fois tous les fichiers réunis,
+nous pouvons les déposer dans le répertoire de notre machine virtuelle.
+C’est donc l’image ISO virtuelle qui va permettre à l’installation
+d’identifier et de retrouver les différents fichiers énumérés
+précédemment. Nous avons donc listé les différents prérequis de
+l’installation automatisée de la machine virtuelle. Nous allons donc
+maintenant voir comment configurer cette installation.</p>
+<h4 id="configuration-de-linstallation-automatique">Configuration de
+l’installation automatique</h4>
+<p>Les diverses informations et actions à faire automatiquement lors de
+l’installation sont écrites dans le fichier de préconfiguration nommé
+preseed.cfg. Nous avons donc récupéré une première version de ce
+fichier. Cette version du fichier contient un peu moins d’une centaine
+de lignes de configuration fournissant au système des informations
+relatives au partitionnement du disque, à la langue utilisée, à la
+disposition du clavier, à la gestion des utilisateurs, à sa
+configuration réseau et autres. En l’état, ce fichier permet déjà de
+lancer une installation automatique. Toutefois, le système installé sera
+assez léger en termes de fonctionnalités utilisables pour nos besoins
+dans cette SAé, les besoins d’un client ou pour un usage qui nous est
+propre. Nous avons donc le loisir d’ajouter les fonctionnalités que l’on
+désire en ajoutant simplement au fichier des lignes de configuration.
+Pour cette SAé, il nous est demandé d’ajouter à l’utilisateur les droits
+sudo et d’installer un certain nombre de paquets. Pour trouver les
+différentes lignes de configuration que nous allons détaillés dans la
+suite de ce rapport, nous nous sommes servis de la <a
+href="https://d-i.debian.org/doc/installation-guide/en.i386/apbs04.html">documentation
+de Debian</a> relative à son installation.</p>
+<h5 id="ajout-des-droits-sudo-à-lutilisateur-standard">Ajout des droits
+sudo à l’utilisateur standard</h5>
+<p>Pour ce qui est de l’ajout des droits sudo à l’utilisateur nous avons
+ajouté dans le fichier la ligne :
+<code>d-i passwd/user-default-groups string sudo</code>.</p>
+<p>Nous allons décortiquer cette ligne de commande afin de mieux comment
+elle fonctionne :</p>
+<ul>
+<li><strong>d-i</strong> : cette valeur est commune à tout les lignes de
+préconfiguration d’un système Debian.</li>
+<li><strong>passwd/user-defaults-groups</strong> : ce paramètre spécifie
+les groupes par défaut pour l’utilisateur.</li>
+<li><strong>string</strong> : ce paramètre permet d’indiquer la valeur
+suivante est une chaine de caractères.</li>
+<li><strong>sudo</strong> : ce paramètre permet naturellement de
+demander à la machine d’ajouter l’utilisateur au groupe sudo, ce qui
+octroi de ce fait les droits sudo à l’utilisateur (à condition bien sûr
+que le paquet de gestion des droits sudo soit installé).</li>
+</ul>
+<p>Il ne nous était pas demander d’ajouter l’utilisateur à d’autres
+groupes par défaut toutefois cette manipulation est possible en ajoutant
+simplement le nom des autres groupes à la fin de cette ligne.</p>
+<h5 id="installation-des-paquets">Installation des paquets</h5>
+<p>Pour ce qui de l’installation automatique des paquets demandés, une
+solution est d’ajouter les lignes suivantes au fichier de
+préconfiguration :</p>
+<p><code>tasksel tasksel/first multiselect mate-desktop</code>
+<code>d-i pkgsel/include string sudo git sqlite3 curl bash-completion neofetch</code></p>
+<p>Comme pour l’ajout des droits sudo, nous allons décortiquer ces deux
+lignes de configuration :</p>
+<ul>
+<li><strong>tasksel</strong> : cette valeur fait appel à l’outil de
+gestion des tâches de Debian permettant notamment d’installer des
+paquets.</li>
+<li><strong>tasksel/first</strong> : ce paramètre permet de spécifier au
+système que cette tâche doit être la première tâche prise en charge par
+l’outil tasksel.</li>
+<li><strong>multiselect</strong> : ce paramètre permet de sélectionner
+plusieurs option.</li>
+<li><strong>mate-desktop</strong> : nous souhaitons installer
+l’environnement de bureau Mate, c’est donc ici que nous le précisons au
+système.</li>
+<li><strong>pkgsel/include</strong> : cette option permet d’installer
+d’autres packages de manière individuelle en plus des paquets installés
+par l’outil tasksel.</li>
+<li><strong>sudo git sqlite3 … neofetch</strong> : ces différents
+paramètres sont les différents paquets installés. La liste nous a été
+précisée dans le sujet.</li>
+</ul>
+<p>Une fois ces différentes configurations mises en place,
+l’installation correspondante aux attentes du sujet peut-être lancée.
+Une fois cette installation terminée, la machine est prête à être
+utilisée pour la suite du travail.</p>
+<h3 id="questions">Questions</h3>
+<ol type="1">
+<li><strong>Que signifie “64-bit” dans “Debian 64-bit” ?</strong></li>
+</ol>
+<p>“64-bit” fait référence à l’architecture des processeurs et du
+système d’exploitation qui peuvent gérer des données en unités de 64
+bits à la fois. Dans le cas de “Debian 64-bit”, cela signifie que la
+version de Debian est conçue pour fonctionner sur des processeurs
+compatibles 64 bits et peut ainsi tirer parti des avantages des
+capacités de traitement accrues et de la mémoire disponible sur ces
+systèmes. En effet, un processeur “64-bit”. (<a
+href="https://www.pcastuces.com/pratique/astuces/4261.htm">PcAstuces</a>)</p>
+<ol start="2" type="1">
+<li><strong>Quelle est la configuration réseau utilisée par défaut
+?</strong></li>
+</ol>
+<p>Par défaut, Debian utilise un service de gestion réseau appelé
+“systemd-networkd” cela se trouve alors dans le fichier
+/etc/network/interfaces avec comme IP statique l’interface Ethernet. (<a
+href="https://www.debian.org/doc/manuals/debian-reference/ch05.fr.html#:~:text=Les%20interfaces%20r%C3%A9seau%20sont%20ordinairement,modernes%20de%20Debian%20sous%20systemd%20">Debian</a>)</p>
+<ol start="3" type="1">
+<li><strong>Quel est le nom du fichier XML contenant la configuration de
+votre machine ?</strong></li>
+</ol>
+<p>Le fichier XML se trouve dans /etc/libvirt/qemu/ et se nomme alors :
+serveur.xml car c’est le nom de notre machine. (<a
+href="https://linux.developpez.com/secubook/node17.php">Linux.developpez</a>)</p>
+<ol start="4" type="1">
+<li><strong>Sauriez-vous le modifier directement ce fichier de
+configuration pour mettre 2 processeurs à votre machine ?</strong></li>
+</ol>
+<p>Oui en allant dans le fichier et en modifiant la ligne avec
+<cpu>.</p>
+<ol start="5" type="1">
+<li>__Qu’est-ce qu’un fichier iso bootable ?__3.
+<strong>Comparons.</strong></li>
+</ol>
+<p>Un fichier ISO bootable est un fichier d’une image d’un disque qui
+contient une copie des données d’un disque optique comme un CD. Ce
+fichier permet alors l’utilisation et l’installation du système
+d’exploitation. (<a
+href="https://www.winzip.com/fr/learn/file-formats/iso/#:~:text=Qu&#39;est%2Dce%20qu&#39;,installer%20un%20syst%C3%A8me%20d&#39;exploitation.">WinZip</a>)</p>
+<ol start="6" type="1">
+<li><strong>Qu’est-ce que MATE ? Gnome ?</strong></li>
+</ol>
+<p>MATE est un environnement de bureau assez intuitif cela permet
+d’avoir un gestionnaire de fichiers des navigateurs web, des lecteurs
+multimédias etc .. GNOME est un environnement plus moderne qui est
+beaucoup plus utilisé pour Linux. (<a
+href="https://mate-desktop.org/fr/#:~:text=MATE%20est%20un%20fork%20de,d&#39;exploitation%20similaires%20%C3%A0%20Unix.">Mate-Desktop</a>)</p>
+<ol start="7" type="1">
+<li><strong>Qu’est-ce qu’un serveur web ?</strong></li>
+</ol>
+<p>Un serveur web est un logiciel conçu pour répondre aux requetes HTTP
+principalement sur un navigateur web. (<a
+href="https://developer.mozilla.org/fr/docs/Learn/Common_questions/Web_mechanics/What_is_a_web_server">Developer
+Mozilla</a>)</p>
+<ol start="8" type="1">
+<li><strong>Qu’est-ce qu’un serveur ssh ?</strong></li>
+</ol>
+<p>Un serveur SSH est un logiciel qui permet aux utilisateurs de se
+connecter de manière securisé à distance. (<a
+href="https://www.it-connect.fr/chapitres/quest-ce-que-ssh/?utm_content=cmp-true">ITConnect</a>)</p>
+<ol start="9" type="1">
+<li><strong>Qu’est-ce qu’un serveur mandataire ?</strong></li>
+</ol>
+<p>Un serveur mandataire est un proxy qui permet un relais entre les
+utilisateurs et le serveurs auxquels ils accèdent sur internet. (<a
+href="https://www.techno-science.net/definition/3812.html">Techno
+Science</a>)</p>
+<ol start="10" type="1">
+<li><strong>Comment peux-t’on savoir à quels groupes appartient
+l’utilisateur user ?</strong></li>
+</ol>
+<p>Pour savoir à quels groupes appartient user on fait groups user (<a
+href="https://wiki.debian.org/SystemGroups">Wiki Debian</a>)</p>
+<ol start="11" type="1">
+<li><strong>À quoi servent les suppléments invités ? Donner 2
+principales raisons de les installer.</strong></li>
+</ol>
+<p>Cela sert à améliorer les performances et les fonctionnalités des
+machines virtuelles :</p>
+<ul>
+<li>Une meilleure intégration hôte-invité</li>
+<li>L’amélioration des performances</li>
+</ul>
+<ol start="12" type="1">
+<li><strong>À quoi sert la commande mount (dans notre cas de figure et
+dans le cas général) ?</strong></li>
+</ol>
+<p>La commande mount est utilisée pour monter un système de fichiers
+dans l’arborescence de répertoires du système d’exploitation. Dans notre
+cas, elle est souvent utilisée pour monter des systèmes de fichiers
+supplémentaires ou des dispositifs de stockage amovibles.(<a
+href="https://www.debian-fr.org/t/mount-et-fstab-pour-les-nuls/22623">Debian
+FR</a>)</p>
+<ol start="13" type="1">
+<li><strong>Qu’est-ce que le Projet Debian ? D’où vient le nom Debian
+?</strong></li>
+</ol>
+<p>Le projet debian est une organisation communautaire qui développe le
+système d’exploitation debian GNU/Linux et est connue pour sa stabilité
+sa sécurité et sa diversité de logiciels. (<a
+href="https://www.debian.org/doc/manuals/project-history/intro.fr.html#:~:text=La%20prononciation%20officielle%20de%20Debian,et%20de%20son%20%C3%A9pouse%2C%20Debra">Debian</a>)</p>
+<ol start="14" type="1">
+<li><strong>Il existe 3 durées de prise en charge (support) de ces
+versions : la durée minimale, la durée en support long terme (LTS) et la
+durée en support long terme étendue (ELTS). Quelle sont les durées de
+ces prises en charge ?</strong></li>
+</ol>
+<ul>
+<li>Durée minimale de prise en charge : environ 5 ans</li>
+<li>Support à long terme : 5 ans supplémentaires</li>
+<li>Support à long terme étendu : 5 années supplémentaires</li>
+</ul>
+<p>(<a href="https://wiki.debian.org/fr/LTS/Extended">Wiki
+Debian</a>)</p>
+<ol start="15" type="1">
+<li><strong>Pendant combien de temps les mises à jour de sécurité
+seront-elles fournies ?</strong></li>
+</ol>
+<p>Environ 5 ans. (<a
+href="https://www.debian.org/doc/manuals/securing-debian-manual/security-update.fr.html">Debian</a>)</p>
+<ol start="16" type="1">
+<li><strong>Combien de version au minimum sont activement maintenues par
+Debian ? Donnez leur nom générique (= les types de
+distribution).</strong></li>
+</ol>
+<p>3 versions : stable, testing et unstable. (<a
+href="https://www.debian.org/releases/index.fr.html#:~:text=Debian%20a%20toujours%20au%20moins,%3A%20stable%20%2C%20testing%20et%20unstable%20.">Debian</a>)</p>
+<ol start="17" type="1">
+<li><strong>Chaque distribution majeure possède un nom de code
+différent. Par exemple, la version majeure actuelle (Debian 12) se nomme
+bookworm. D’où viennent les noms de code données aux distributions
+?</strong></li>
+</ol>
+<p>Cela vient des personnages de Toy Story. (<a
+href="https://www.debian.org/releases/index.fr.html#:~:text=Debian%20a%20toujours%20au%20moins,%3A%20stable%20%2C%20testing%20et%20unstable%20.">Debian</a>)</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Stabilité</th>
+<th style="text-align: center;">Version</th>
+<th style="text-align: center;">Personnages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Stable</td>
+<td style="text-align: center;">Debian 12</td>
+<td style="text-align: center;">Bookworm</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Oldstable</td>
+<td style="text-align: center;">Debian 11</td>
+<td style="text-align: center;">Bullseyes</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 10</td>
+<td style="text-align: center;">Buster</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 9</td>
+<td style="text-align: center;">Stretch</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 8</td>
+<td style="text-align: center;">Jessie</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Obsolète</td>
+<td style="text-align: center;">Debian 7</td>
+<td style="text-align: center;">Wheezy</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 6</td>
+<td style="text-align: center;">Squeeze</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 5</td>
+<td style="text-align: center;">Lenny</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 4</td>
+<td style="text-align: center;">Etch</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 3,1</td>
+<td style="text-align: center;">Sarge</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 3</td>
+<td style="text-align: center;">Woody</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 2,2</td>
+<td style="text-align: center;">Potato</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 2,1</td>
+<td style="text-align: center;">Slink</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Debian 2,0</td>
+<td style="text-align: center;">Hamm</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+<td style="text-align: center;">-———-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Inconnue</td>
+<td style="text-align: center;">Debian X</td>
+<td style="text-align: center;">Trixie</td>
+</tr>
+</tbody>
+</table>
+<ol start="18" type="1">
+<li><strong>L’un des atouts de Debian fut le nombre d’architecture
+(processeurs) officiellement prises en charge. Combien et lesquelles
+sont prises en charge par la version Bullseye ?</strong></li>
+</ol>
+<p>Il y en a actuellement environ 13. (<a
+href="https://www.debian.org/releases/stable/s390x/ch02s01.fr.html">Debian</a>)</p>
+<ol start="19" type="1">
+<li><strong>Première version avec un nom de code</strong></li>
+</ol>
+<ul>
+<li><strong>Quelle a était le premier nom de code utilisé
+?</strong></li>
+<li><strong>Quand a-t-il été annoncé ?</strong></li>
+<li><strong>Quelle était le numéro de version de cette distribution
+?</strong></li>
+</ul>
+<p>La première était Buzz annoncé le 17 juin 1996 avec comme numéro 1.1
+(<a href="https://fr.wikipedia.org/wiki/Debian">Wikipédia</a>)</p>
+<ol start="20" type="1">
+<li><strong>Dernier nom de code attribué</strong></li>
+</ol>
+<ul>
+<li><strong>Quel est le dernier nom de code annoncée à ce jour
+?</strong></li>
+<li><strong>Quand a-t-il été annoncé ?</strong></li>
+<li><strong>Quelle est la version de cette distribution ?</strong></li>
+</ul>
+<p>La dernière est Bookworm annoncé le 14 août 2023 avec comme numéro
+12.(<a href="https://fr.wikipedia.org/wiki/Debian">Wikipédia</a>)</p>
+<h2 id="semaine-8">Semaine 8</h2>
+<h3 id="description-du-travail-de-la-semaine-1">Description du travail
+de la semaine</h3>
+<p>Pour ce qui est maintenant de la semaine 8, nous allons procéder à la
+recherche et à l’analyse d’applications clientes en gérant et en
+installant des dépôts git par le biais d’une interface graphique. Il est
+donc attendu de nous d’apprendre à utiliser git. Pour cela, il est
+possible de lire des documentations qui ne sont toutefois pas forcément
+toujours fournies. Nous allons évidemment également utiliser nos
+compétences acquises à l’aide de la ressource R2.03 de qualité de
+développement. Une autre solution est de tester différentes commandes et
+techniques sur nos propres fichiers en créant des dépôts git.</p>
+<p>Nous pouvons donc installer l’outil git, qui est libre de droits,
+ainsi que les applications graphiques officielles associées et les
+comparer ensuite une à une.</p>
+<h3 id="configuration-de-git">Configuration de git</h3>
+<p>La première étape, une fois git installé, consiste à le configurer.
+Ces configurations sont légères et permettent de fournir des données sur
+l’utilisateur lors des différents commits<a href="#fn3"
+class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> et
+push<a href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a>. Cette étape se fait avec les
+exécutions des deux commandes suivantes :</p>
+<pre><code>git config --global user.name &quot;&lt;username&gt;&quot;
+git config --global user.email &quot;&lt;useremail&gt;&quot;</code></pre>
+<p><br />
+La seconde étape permet, elle, d’installer les logiciels
+<strong>gitk</strong> et <strong>git-gui</strong>. Cette étape consiste
+elle aussi à la simple exécution des commandes :</p>
+<pre><code>sudo apt-get install gitk
+sudo apt-get install git-gui </code></pre>
+<p><em>L’utilisateur doit évidemment posséder les droits sudo ou être
+administrateur du système pour exécuter ces commandes</em><br />
+Une fois les différentes installations et configurations accomplies nous
+pouvons les tester afin de constater de la bonne réalisation, ou non,
+des précédentes étapes. Pour cela, nous allons tout simplement créer un
+dépôt git et y ajouter une multitude de fichiers et de documents. A
+l’aide de l’interface graphique, nous pouvons par la suite constater les
+différents commits réalisés dans ce dépôt.</p>
+<blockquote>
+<p><img src="assets/attention.png" id="id" class="class" width="30"
+height="30" alt="Attention" /> Pour bien tenir à jour son dépôt git, il
+est conseillé après l’implémentation de fonctionnalités dans un projet
+ou bien après une avancé significative de faire un commit, puis
+d’uploader les fichiers sur le dépot existant (si ce dernier
+existe).</p>
+<pre><code>git add . #Pour ajouter les fichiers au commit
+git commit -m &quot;message associé au commit&quot; #Pour réaliser le commit
+git pull #Permet de récupérer la dernière version sur le dépot distant et d&#39;éviter les conflits de version
+git push #Permet d&#39;uploader les différents commits sur le dépôt distant</code></pre>
+</blockquote>
+<p>Concernant l’interface graphique utiliseé pour le git nous avons
+choisi Magit qui est un outil gratuit et assez simple d’utilisation
+permettant d’avoir des informations détaillées et une belle image
+d’ensemble du dépôt git. Après des tests sur nos fichiers en créant des
+dépots git et en comparant l’interface graphique de base et git et celle
+que nous avons choisi nous avons repéré les avantages suivants : -
+D’abord git Magic est basé sur des lignes de commande qui offrent plus
+de flexibilité que l’interface graphique de base. - Un des autres
+avantages est la personnalisation disponible qui permet de modifier
+l’environnement avec des fichiers de script de git magics - On peut
+également automatiser des tâches avec git magics ce que l’on ne peut pas
+faire avec l’interface de base Les inconvénients que nous avons pu
+trouver sont que les lignes de commande à écrire pour effectuer des
+tâches peuvent être plus complexes à comprendre grâce à la grande
+disposition de personnalisation disponible mais après des recherches et
+des tests effectués il est plus simple à comprendre.</p>
+<h3 id="questions-1">Questions</h3>
+<ol type="1">
+<li><strong>Qu’est-ce que le logiciel gitk ? Comment se lance-t-il
+?</strong></li>
+</ol>
+<p>Gitk est une interface graphique pour git cela permet de visualiser
+l’historique des commits, les branches tags etc.. Il est utile pour
+explorer l’historique d’un projet. Et cela se lance avec la commande
+“gitk”. (Codeur-Pro)</p>
+<ol start="2" type="1">
+<li><strong>Qu’est-ce que le logiciel git-gui ? Comment se lance-t-il
+?</strong></li>
+</ol>
+<p>Git gui est un système de controle de version contrairement à gitk
+qui se concentre sur la visualisation il offre une interface graphique
+pour effectuer différentes variété d’opérations Git et cela se lance
+avec la commande “git gui”. (<a
+href="https://codeur-pro.fr/git-gui-guide-complet/">Codeur-Pro</a>)</p>
+<ol start="3" type="1">
+<li><strong>Pourquoi avez-vous choisi ce logiciel ?</strong></li>
+</ol>
+<p>Nous avons choisi le logiciel Magic car il est tout d’abord gratuit
+sur l’utilisation courante que l’on souhaite mais aussi simple
+d’utilisation tout en fournissant toutes les informations nécessaire sur
+ce que nous avons besoin. (<a
+href="https://git-scm.com/download/gui/Linux">Git-scm</a>)</p>
+<ol start="4" type="1">
+<li><strong>Comment l’avez vous installé ?</strong></li>
+</ol>
+<p>Pour installer cela on fait ces commandes suivantes :</p>
+<pre><code>git clone https://github.com/blynn/gitmagic.git
+cd gitmagic
+./install.sh</code></pre>
+<h2 id="semaine-10">Semaine 10</h2>
+<h3 id="description-du-travail-de-la-semaine-2">Description du travail
+de la semaine</h3>
+<p>Cette semaine nous allons découvrir l’installation du service gitea.
+Gitea est d’abord une plateforme de gestion de code il fonctionne sur le
+même principe que github et gitlab avec de la collaboration. Il s’agit
+alors d’un logiciel open-source qui permet à des équipes de travailler
+ensemble efficacement sur des projets. Gitea est populaire sur les
+petites équipes de développement pour des projets open sources car il
+est léger et facile de configuration.</p>
+<h3 id="configuration-de-la-machine">Configuration de la machine</h3>
+<p>Pour cela nous allons d’abord commencer par faire la redirection de
+port de notre machine virtuel cela permet d’éviter des problèmes sur
+l’utilisation plus tard de tests que l’on souhaiterait faire. Nous
+allons alors aller dans la configuration de la VM puis aller dans réseau
+puis cliquer sur redirection de port ensuite il faut cliquer en haut à
+droite pour ajouter une redirection. On nomme alors notre redirection
+gitea et on lui met un port hôte ainsi qu’un port invité à 3000. On peut
+ensuite redémarrer la machine virtuelle.</p>
+<p>###  Installation de gitea sur la machine</p>
+<p>Ensuite nous devons procéder à l’installation du binaire pour cela
+nous allons sur la documentation des étapes d’installation pour
+récupérer le fichier contenant l’extension <code>.linux-amd64</code>
+dans la dernière version disponible ici dans notre cas il y en a un seul
+étant <code>gitea-1.21.7-linux-amd64.xz</code> on le télécharge alors
+sur notre machine virtuelle puis on suit les instructions.</p>
+<p>A partir du fichier téléchargé on peut alors décompresser l’archive
+en le mettant dans un dossier créé pour gitea puis on donne la
+permission avec:<br />
+<code>sudo chmod +x gitea-1.21.7-linux-amd64</code><br />
+Il faut aussi vérifier que notre version de git est compatible avec
+celle de gitea pour cela nous faisons git –version et il faut que la
+version soit supérieur à 2. On trouve toutes ces instructions sur la
+documentation d’installation par fichier binaire de gitea :
+(Doc-Gitea)</p>
+<p>Une fois le fichier installer et les permissions misent il suffit
+alors de le lancer en suivant les instructions de la documentation, on
+arrive alors ensuite lors du premier lancement sur le paramètrage de
+gitea grâce à la partie web il faut alors mettre comme base de données
+sqlite3 et comme compte administrateur : nom gitea, password gitea et
+comme email git@localhost</p>
+<p>La documentation de gitea nous informe ensuite qu’il faut protéger
+les fichiers <code>/etc/gitea</code> et <code>/etc/gitea/app.ini</code>
+avec les commandes suivantes :</p>
+<pre><code>chmod 750 /etc/gitea
+chmod 640 /etc/gitea/app.ini</code></pre>
+<h3 id="création-du-projet">Création du projet</h3>
+<p>Pour créer un projet il suffit sur la partie web de se connecter au
+compte gitea et d’aller sur l’option nouveau projet et de remplir les
+détails du projet comme le nom la description et les options de
+visibilités. On peut ensuite configurer comme paramètre de visibilité
+comme lecture et ajoutant dans le projet les sujets de TP nous avons
+alors ensuite tenter de visualiser le projet pour confirmer qu’il était
+accessible. Nous avons effectué une série de tests pour vérifier que les
+utilisateurs avaient les droits appropriés sur nos projets. Ces tests
+comprenaient la modification des autorisations pour différents
+utilisateurs et la vérification des actions possibles pour chacun. Nous
+avons documenté chaque test, en notant les résultats réussis et les
+problèmes rencontrés. Par exemple, nous avons constaté qu’un utilisateur
+pouvait voir le projet mais ne pouvait pas le modifier, ce qui indiquait
+une erreur dans la configuration des autorisations. Nous avons ensuite
+vérifié la configuration de la redirection de port pour l’accès à gitea
+depuis d’autres interfaces ce que nous avions mal fait après une erreur
+d’écriture sur la redirection pendant la configuration de la machine
+virtuelle.</p>
+<h3 id="questions-2">Questions</h3>
+<ol type="1">
+<li><strong>Qu’est-ce que Gitea ?</strong></li>
+</ol>
+<p>Gitea est d’abord une plateforme de gestion de code il fonctionne sur
+le même principe que github et gitlab avec de la collaboration. Il
+s’agit alors d’un logiciel open-source qui permet à des équipes de
+travailler ensemble efficacement sur des projets. Gitea est populaire
+sur les petites équipes de développement pour des projets open sources
+car il est léger et facile de configuration. (<a
+href="https://docs.gitea.com/next/">Doc-Gitea</a>)</p>
+<ol start="2" type="1">
+<li><strong>À quels logiciels bien connus dans ce domaine peut-on le
+comparer (en citer au moins 2) ?</strong></li>
+</ol>
+<p>Comme dit précédemment on peut comparer gitea à gitlab et github qui
+sont également des outils de développeurs qui permettent d’héberger des
+codes sources et de travailler en équipe. (<a
+href="https://docs.gitea.com/next/">Doc-Gitea</a>)</p>
+<ol start="3" type="1">
+<li><strong>Quelle version du binaire avez-vous installée ? Donnez la
+version et la commande permettant d’obtenir cette
+information.</strong></li>
+</ol>
+<p>Nous avons pris la version 1.21.7 et le fichier
+gitea-1.21.7-linux-amd64.xz pour voir la version du fichier binaire
+installé sur notre VM il suffit de faire la commande gitea –version (<a
+href="https://docs.gitea.com/next/installation/install-from-binary">Doc-Gitea</a>)</p>
+<ol start="4" type="1">
+<li><strong>Comment faire pour mettre à jour le binaire de votre service
+sans devoir tout reconfigurer ? Essayez en mettant à jour vers la
+version 1.22-dev.</strong></li>
+</ol>
+<p>Pour cela il suffit de télécharger la nouvelle version du binaire
+Gitea à partir du site officiel de gitea puis de le remplacez pas
+l’ancien et lui donner les permissions nécessaires. Il faut ensuite
+redémarrez le service Gitea pour prendre en compte les changements de
+version du fichier binaire. (<a
+href="https://docs.gitea.com/next/installation/install-from-binary">Doc-Gitea</a>)</p>
+<section class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p><strong>BIOS</strong> : <em>Basic
+Input/Output System</em>. Le BIOS est un logiciel utilisé par le
+microprocesseur de la machine lors de sa mise sous tension pour
+permettre le démarrage du système de son système d’exploitation.<a
+href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p><strong>Sudo</strong> :
+<em>Substitute user do</em>. Cette commande permet à l’administrateur
+d’un système Linux d’accorder à certains utilisateurs ou groupes
+d’utilisateurs la possibilité de lancer la commande en tant
+qu’administrateur. Les utilisateurs ayant la possibilité d’utiliser
+cette commande doivent faire partie du groupe sudo du système.<a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p><strong>Commit</strong> : Les commits
+constituent les piliers d’une chronologie de projet Git. Les commits
+peuvent être considérés comme des instantanés ou des étapes importantes
+dans la chronologie d’un projet git. Ils sont créés grâce à la commande
+git commit pour capturer l’état d’un projet à un point dans le temps.
+(<a
+href="https://www.atlassian.com/fr/git/tutorials/saving-changes/git-commit">Atlassian</a>)<a
+href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p><strong>Push</strong> : Concrétement
+un push permet d’uploader les différents commits réalisés de manière
+locale sur le dépôt distant.<a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</body>
+</html>
